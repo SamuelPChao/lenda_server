@@ -1,0 +1,92 @@
+[
+  {
+    "brand": "hollyland",
+    "model": "mars 4k rx",
+    "type": "receiver",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 800,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/MARS4KR_01.png",
+    "inventory": 1
+  },
+  {
+    "brand": "hollyland",
+    "model": "mars 4k tx",
+    "type": "transmitter",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 800,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/MARS4KT_01.png",
+    "inventory": 1
+  },
+  {
+    "brand": "hollyland",
+    "model": "cosmo 2000r",
+    "type": "receiver",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c820",
+    "price": 1200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Hollyland%20Cosmo%202000R%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E6%8E%A5%E6%94%B6%E5%99%A8_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "hollyland",
+    "model": "cosmo 2000t",
+    "type": "transmitter",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 1200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Hollyland%20Cosmo%202000T%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E7%99%BC%E5%B0%84%E5%99%A8_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "hollyland",
+    "model": "cosmo 600r",
+    "type": "receiver",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c820",
+    "price": 1000,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Hollyland%20cosmo%20600%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E6%8E%A5%E6%94%B6%E5%99%A8_%E6%AD%A345.png",
+    "inventory": 1
+  },
+  {
+    "brand": "hollyland",
+    "model": "cosmo 600t",
+    "type": "transmitter",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 1000,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Hollyland%20cosmo%20600%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E7%99%BC%E5%B0%84%E5%99%A8_%E6%AD%A345.png",
+    "inventory": 1
+  },
+  {
+    "brand": "swit",
+    "model": "s4914t",
+    "type": "transmitter",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 1500,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/SWIT%20S4914T%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E7%99%BC%E5%B0%84%E5%99%A8-1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "swit",
+    "model": "s4914r",
+    "type": "receiver",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c820",
+    "price": 1500,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/SWIT%20S4914R%20%E7%84%A1%E7%B7%9A%E5%9C%96%E5%82%B3%20%E6%8E%A5%E6%94%B6%E5%99%A8-1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "swit",
+    "model": "s4904t",
+    "type": "transmitter",
+    "signalType": ["hdmi", "sdi"],
+    "battery": "648ff58b5383713b2f73c81e",
+    "price": 1500,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/SWITS4904T_1.png",
+    "inventory": 1
+  }
+]

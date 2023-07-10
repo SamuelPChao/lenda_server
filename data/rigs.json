@@ -1,0 +1,50 @@
+[
+  {
+    "brand": "smallrig",
+    "model": "sony fx3 cage",
+    "camera": "648ffc8b7253daf496f1f5ee",
+    "price": 200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20FX3%20SmallRig%20Cage_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "tilta",
+    "model": "sony fx3 cage",
+    "camera": "648ffc8b7253daf496f1f5ee",
+    "price": 300,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20FX3%20Tilta%20Cage_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "tilta",
+    "model": "canon r5c cage",
+    "camera": "648ffc8b7253daf496f1f5ec",
+    "price": 200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Tilta%20R5C%20%E6%8F%90%E7%B1%A0.png",
+    "inventory": 1
+  },
+  {
+    "brand": "tilta",
+    "model": "sony a74 cage",
+    "camera": "648ffc8b7253daf496f1f5f6",
+    "price": 300,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20A74%20Tilta%20%E6%8F%90%E7%B1%A0%E7%B5%84.png",
+    "inventory": 1
+  },
+  {
+    "brand": "tilta",
+    "model": "sony a7s3 cage",
+    "camera": "648ffc8b7253daf496f1f5f7",
+    "price": 300,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20A7S3%20Tilta%20%E6%8F%90%E7%B1%A0%E7%B5%84_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "smallrig",
+    "model": "sony a1 cage",
+    "camera": "648ffc8b7253daf496f1f5f8",
+    "price": 200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20A7S3%20Small%20Rig%20%E6%8F%90%E7%B1%A0%E7%B5%84.png",
+    "inventory": 1
+  }
+]

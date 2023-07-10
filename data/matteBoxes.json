@@ -1,0 +1,38 @@
+[
+  {
+    "brand": "tilta",
+    "model": "mb-t16 4x5.65 matte box",
+    "filterSize": 5.65,
+    "filterQuantity": 1,
+    "price": 400,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/T16_01.png",
+    "inventory": 1
+  },
+  {
+    "brand": "smallrig",
+    "model": "2660 light-weight 4x5.65 matte box",
+    "filterSize": 5.65,
+    "filterQuantity": 1,
+    "price": 300,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/SmallRig%202660_1.png",
+    "inventory": 1
+  },
+  {
+    "brand": "tilta",
+    "model": "mb-t12 4x5.65 matte box",
+    "filterSize": 5.65,
+    "filterQuantity": 3,
+    "price": 600,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Tilta%20MB-T12_01.png",
+    "inventory": 1
+  },
+  {
+    "brand": "arri",
+    "model": "lmb 6.6x6.6 matte box",
+    "filterSize": 6.6,
+    "filterQuantity": 3,
+    "price": 2000,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/ARRI%20LMB%206.6x6.6%20%E5%A4%A7%E5%9E%8B%E9%81%AE%E5%85%89%E6%96%97%E7%B5%84_1.png",
+    "inventory": 1
+  }
+]

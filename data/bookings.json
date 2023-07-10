@@ -1,0 +1,15 @@
+[
+  {
+    "_id": "64925699d5d06a13c6a04c79",
+    "cart": [
+      {
+        "_id": "648ffc8b7253daf496f1f5e9",
+        "documentType": "Camera",
+        "quantity": 1,
+        "price": 2200
+      }
+    ],
+    "user": "6491412247b678590f6b9ddc",
+    "totalPrice": 2200
+  }
+]

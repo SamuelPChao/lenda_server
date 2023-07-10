@@ -1,0 +1,51 @@
+[
+  {
+    "brand": "canon",
+    "model": "lp-e6",
+    "price": 50,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Canon%20LP-E6%20%E7%9B%B8%E6%A9%9F%E9%9B%BB%E6%B1%A0.png",
+    "inventory": 1
+  },
+  {
+    "brand": "sony",
+    "model": "np-fw50",
+    "price": 50,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20NP-FW50%20%E9%9B%BB%E6%B1%A0.png",
+    "inventory": 1
+  },
+  {
+    "brand": "sony",
+    "model": "fz-100",
+    "price": 50,
+    "imageSRC": "https://store.sony.com.tw/resource/file/product_files/NP-FZ100/NP-FZ100_right_e007b.jpg",
+    "inventory": 1
+  },
+  {
+    "brand": "sony",
+    "model": "bp-u60",
+    "price": 50,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Sony%20BP-U60%20%E5%8E%9A%E9%9B%BB%E6%B1%A0.png",
+    "inventory": 1
+  },
+  {
+    "brand": "sony",
+    "model": "np-f970",
+    "price": 50,
+    "imageSRC": "https://www.sony.com.hk/asset/image/products/np_f970_600px.gif",
+    "inventory": 1
+  },
+  {
+    "brand": "fxlion",
+    "model": "nano two v-lock",
+    "price": 100,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Fxlion%20Nano%20Two%20V%20Lock%E9%9B%BB%E6%B1%A0.png",
+    "inventory": 1
+  },
+  {
+    "brand": "fxlion",
+    "model": "bp-m230 v-lock",
+    "price": 200,
+    "imageSRC": "https://s3-ap-northeast-1.amazonaws.com/mgrwebstore/img/webimgs/thumbs/Fxlion%20BP-M230%20V%20Lock%E9%9B%BB%E6%B1%A0.png",
+    "inventory": 1
+  }
+]
