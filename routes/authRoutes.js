@@ -25,7 +25,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 // router.get("/logout", protect, logout);
 router.get("/logout", logout);
-router.post("/testing", isLoggedIn);
+router.post("/isLoggedIn", isLoggedIn);
 router.route("/").get(getAllUsers);
 
 // router.use(protect);
