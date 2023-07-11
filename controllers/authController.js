@@ -6,7 +6,7 @@ const sharp = require("sharp");
 const User = require("../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
-const Email = require("../utils/email");
+
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -220,32 +220,32 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
         },
       });
     }
-    // if (req.body.token) {
-    //   const decoded = await promisify(verify)(
-    //     req.body.token,
-    //     process.env.JWT_SECRET
-    //   );
-    //   const currentUser = await User.findById(decoded.id);
-    //   if (!currentUser) {
-    //     res.status(401).json({
-    //       status: "Not authorized",
-    //       data: {},
-    //     });
-    //   }
-    //   if (currentUser.changePasswordAfter(decoded.iat)) {
-    //     res.status(401).json({
-    //       status: "Password Changed",
-    //       data: {},
-    //     });
-    //   }
-    //   res.locals.user = currentUser;
-    //   res.status(200).json({
-    //     status: "success",
-    //     data: {
-    //       user: currentUser,
-    //     },
-    //   });
-    // }
+    if (req.body.token) {
+      const decoded = await promisify(verify)(
+        req.body.token,
+        process.env.JWT_SECRET
+      );
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        res.status(401).json({
+          status: "Not authorized",
+          data: {},
+        });
+      }
+      if (currentUser.changePasswordAfter(decoded.iat)) {
+        res.status(401).json({
+          status: "Password Changed",
+          data: {},
+        });
+      }
+      res.locals.user = currentUser;
+      res.status(200).json({
+        status: "success",
+        data: {
+          user: currentUser,
+        },
+      });
+    }
   } catch (err) {
     console.log(err);
   }
