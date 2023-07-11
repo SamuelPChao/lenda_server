@@ -16,7 +16,7 @@ const bookingRouter = require("./routes/bookingRoutes");
 const newsRouter = require("./routes/newsRoutes");
 
 const corsOptions = {
-  origin: "https://lenda-camera.netlify.app",
+  origin: ["https://lenda-camera.netlify.app","http://localhost:5173"],
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -26,12 +26,15 @@ app.options("*", cors(corsOptions));
 
 app.use(helmet());
 app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://lenda-camera.netlify.app"
-  );
+  const allowedOrigins = ["https://lenda-camera.netlify.app", "http://localhost:5173"];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
   next();
 });
+
 
 const limiter = rateLimit({
   max: 100,
