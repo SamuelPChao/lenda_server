@@ -26,7 +26,7 @@ const createSendToken = (user, statusCode, req, res) => {
           60 *
           1000
     ),
-    // secure: true,
+    secure: true,
     //set secure to true so cookie will be sent on a encrypted connection (HTTPS)
     httpOnly: true,
     //set httpOnly to true so cookie cannot be accessed or modified in any way by the browser
