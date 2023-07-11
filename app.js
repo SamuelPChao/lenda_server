@@ -16,7 +16,7 @@ const bookingRouter = require("./routes/bookingRoutes");
 const newsRouter = require("./routes/newsRoutes");
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "https://chic-bavarois-3ca720.netlify.app/",
   credentials: true,
 };
 app.use(cors(corsOptions));
