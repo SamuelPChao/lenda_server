@@ -128,6 +128,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res) => {
   const cookieOptions = {
     expires: new Date(Date.now() + 10 * 1000),
+    secure:true,
     httpOnly: true,
   };
   res.cookie("jwt", "", cookieOptions);
