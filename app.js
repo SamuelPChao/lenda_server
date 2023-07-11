@@ -16,7 +16,7 @@ const bookingRouter = require("./routes/bookingRoutes");
 const newsRouter = require("./routes/newsRoutes");
 
 const corsOptions = {
-  origin: "https://chic-bavarois-3ca720.netlify.app/",
+  origin: "https://chic-bavarois-3ca720.netlify.app",
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -28,7 +28,7 @@ app.use(helmet());
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://chic-bavarois-3ca720.netlify.app/"
+    "https://chic-bavarois-3ca720.netlify.app"
   );
   next();
 });
