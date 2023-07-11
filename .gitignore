@@ -2,3 +2,4 @@ node_modules/
 *.txt
 *.prettierrc
 *.eslintrc.json
+config.env
