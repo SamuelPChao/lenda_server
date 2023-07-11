@@ -131,6 +131,8 @@ exports.logout = (req, res) => {
     secure:true,
     httpOnly: true,
   };
+  req.user = undefined;
+  res.locals.user = undefined;
   res.cookie("jwt", "", cookieOptions);
   res.status(200).json({
     status: "success",
