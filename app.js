@@ -28,7 +28,7 @@ app.use(helmet());
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://localhost:5173"
+    "https://chic-bavarois-3ca720.netlify.app/"
   );
   next();
 });
