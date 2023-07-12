@@ -27,9 +27,7 @@ const createSendToken = (user, statusCode, req, res) => {
           1000
     ),
     secure: true,
-    //set secure to true so cookie will be sent on a encrypted connection (HTTPS)
     httpOnly: true,
-    //set httpOnly to true so cookie cannot be accessed or modified in any way by the browser
     sameSite: "none",
   };
   // if (process.env.NODE_ENV === "production")
@@ -38,8 +36,8 @@ const createSendToken = (user, statusCode, req, res) => {
   res.set("Authorization",token)
   res.cookie("jwt", token, cookieOptions);
 
-  //remove password from outputing
   user.password = undefined;
+  
   res.status(statusCode).json({
     status: "Success",
     token,
@@ -49,15 +47,6 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 exports.signup = catchAsync(async (req, res, next) => {
-  // const newUser = await User.create({
-  //   name: req.body.name,
-  //   email: req.body.email,
-  //   password: req.body.password,
-  //   passwordConfirm: req.body.passwordConfirm,
-  //   passwordChangedAt: req.body.passwordChangedAt,
-  //   // passwordChangedAt: Date.now(),
-  //   role: req.body.role,
-  // });
   const newUser = await User.create(req.body);
 
   // const url = `${req.protocol}://${req.get("host")}/me`;
@@ -67,31 +56,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, req, res);
 });
 
-// exports.login = catchAsync(async (req, res, next) => {
-//   const { email, password } = req.body;
-//   if (!email || !password) {
-//     return next(
-//       new AppError(
-//         "Please provide valid email and password",
-//         400
-//       )
-//     );
-//   }
-
-//   const user = await User.findOne({
-//     email: email,
-//   }).select("+password");
-//   if (
-//     !user ||
-//     !(await user.correctPassword(password, user.password))
-//   ) {
-//     return next(
-//       new AppError("Invalid email or password", 401)
-//     );
-//   }
-
-//   createSendToken(user, 200, req, res);
-// });
 exports.login = catchAsync(async (req, res, next) => {
   const { identification, password } = req.body;
   if (!identification || !password) {
@@ -134,55 +98,6 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.protect = catchAsync(async (req, res, next) => {
-  let token;
-  //Check And Get Token
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.jwt) {
-    token = req.cookies.jwt;
-  }
-  if (!token)
-    //Protect From Access The Route Without Token
-    return next(new AppError("Not authorized", 401));
-
-  //Verify Token
-  //jwt.verify is an asynchronous function with callback function as third argument
-  //Promisify the function in case of blocking the code from executing
-  //And Call the function with the (argument1, argument2)
-  const decoded = await promisify(verify)(
-    token,
-    process.env.JWT_SECRET
-  );
-
-  //Protect From Token Issued Before User Deleted Or No Longer Exists
-  const currentUser = await User.findById(decoded.id);
-  // console.log(decoded);
-  if (!currentUser) {
-    return next(
-      new AppError(
-        "User belonging to the token no longer exist",
-        401
-      )
-    );
-  }
-
-  //Protect From Using Token Issued Before Password Changed
-  if (currentUser.changePasswordAfter(decoded.iat)) {
-    return next(
-      new AppError("User recently changed password", 401)
-    );
-  }
-
-  //Assign The User Found In DB With The Token To The Request For Later Use
-  req.user = currentUser;
-  res.locals.user = currentUser;
-  //Grant Access To Protected Route => next()
-  next();
-});
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   try {
