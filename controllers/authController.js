@@ -35,18 +35,11 @@ const createSendToken = (user, statusCode, req, res) => {
   // if (process.env.NODE_ENV === "production")
   //   cookieOptions.secure = true;
 
-  //for proxy server https secure
-  if (
-    req.secure ||
-    req.headers["x-forwarded-proto"] === "https"
-    //for proxy server
-  )
-    cookieOptions.secure = true;
+  res.set("Authorization",token)
   res.cookie("jwt", token, cookieOptions);
 
   //remove password from outputing
   user.password = undefined;
-
   res.status(statusCode).json({
     status: "Success",
     token,
@@ -193,13 +186,41 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   try {
-    if (req.cookies.jwt) {
-      console.log(req.cookies.jwt,'cookie')
+    // if (req.cookies.jwt) {
+    //   console.log(req.cookies.jwt,'cookie')
+    //   const decoded = await promisify(verify)(
+    //     req.cookies.jwt,
+    //     process.env.JWT_SECRET
+    //   );
+
+    //   const currentUser = await User.findById(decoded.id);
+    //   if (!currentUser) {
+    //     res.status(401).json({
+    //       status: "Not authorized",
+    //       data: {},
+    //     });
+    //   }
+
+    //   if (currentUser.changePasswordAfter(decoded.iat)) {
+    //     res.status(401).json({
+    //       status: "Password changed",
+    //       data: {},
+    //     });
+    //   }
+
+    //   res.locals.user = currentUser;
+    //   res.status(200).json({
+    //     status: "success",
+    //     data: {
+    //       user: currentUser,
+    //     },
+    //   });
+    // }
+    if (req.headers.authorization) {
       const decoded = await promisify(verify)(
-        req.cookies.jwt,
+        req.headers.authorization,
         process.env.JWT_SECRET
       );
-
       const currentUser = await User.findById(decoded.id);
       if (!currentUser) {
         res.status(401).json({
@@ -207,14 +228,12 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
           data: {},
         });
       }
-
       if (currentUser.changePasswordAfter(decoded.iat)) {
         res.status(401).json({
-          status: "Password changed",
+          status: "Password Changed",
           data: {},
         });
       }
-
       res.locals.user = currentUser;
       res.status(200).json({
         status: "success",
@@ -222,37 +241,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
           user: currentUser,
         },
       });
-    }
-    if (req.headers.authorization) {
-      console.log('wtf')
-      // const decoded = await promisify(verify)(
-      //   req.body.token,
-      //   process.env.JWT_SECRET
-      // );
-      // const currentUser = await User.findById(decoded.id);
-      // if (!currentUser) {
-      //   res.status(401).json({
-      //     status: "Not authorized",
-      //     data: {},
-      //   });
-      // }
-      // if (currentUser.changePasswordAfter(decoded.iat)) {
-      //   res.status(401).json({
-      //     status: "Password Changed",
-      //     data: {},
-      //   });
-      // }
-      // res.locals.user = currentUser;
-      // res.status(200).json({
-      //   status: "success",
-      //   data: {
-      //     user: currentUser,
-      //   },
-      // });
-      res.status(200).json({
-        status:"success",
-        data:null
-      })
     }
     next()
   } catch (err) {
