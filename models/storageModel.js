@@ -52,7 +52,7 @@ const storageSchema = new mongoose.Schema(
 
 storageSchema.virtual("name").get(function () {
   return (
-    this.brand + " " + this.model + " " + this.size + " gb"
+    this.brand + " " + this.model + " " + this.storageSize + " gb"
   );
 });
 
