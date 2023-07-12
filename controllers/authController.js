@@ -223,32 +223,37 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
         },
       });
     }
-    // if (req.body.token) {
-    //   const decoded = await promisify(verify)(
-    //     req.body.token,
-    //     process.env.JWT_SECRET
-    //   );
-    //   const currentUser = await User.findById(decoded.id);
-    //   if (!currentUser) {
-    //     res.status(401).json({
-    //       status: "Not authorized",
-    //       data: {},
-    //     });
-    //   }
-    //   if (currentUser.changePasswordAfter(decoded.iat)) {
-    //     res.status(401).json({
-    //       status: "Password Changed",
-    //       data: {},
-    //     });
-    //   }
-    //   res.locals.user = currentUser;
-    //   res.status(200).json({
-    //     status: "success",
-    //     data: {
-    //       user: currentUser,
-    //     },
-    //   });
-    // }
+    if (req.headers.authorization) {
+      console.log('wtf')
+      // const decoded = await promisify(verify)(
+      //   req.body.token,
+      //   process.env.JWT_SECRET
+      // );
+      // const currentUser = await User.findById(decoded.id);
+      // if (!currentUser) {
+      //   res.status(401).json({
+      //     status: "Not authorized",
+      //     data: {},
+      //   });
+      // }
+      // if (currentUser.changePasswordAfter(decoded.iat)) {
+      //   res.status(401).json({
+      //     status: "Password Changed",
+      //     data: {},
+      //   });
+      // }
+      // res.locals.user = currentUser;
+      // res.status(200).json({
+      //   status: "success",
+      //   data: {
+      //     user: currentUser,
+      //   },
+      // });
+      res.status(200).json({
+        status:"success",
+        data:null
+      })
+    }
     next()
   } catch (err) {
     console.log(err);
