@@ -58,10 +58,15 @@ exports.getProductByType = catchAsync(
       Model = models[modelName];
     }
     const doc = await Model.find();
-    if (!doc)
-      return next(
-        new AppError("No product found with the type", 404)
-      );
+    if (!doc) {
+      return res.status(404).json({
+        status: "data not found",
+        data: null,
+      });
+      // return next(
+      //   new AppError("No product found with the type", 404)
+      // );
+    }
 
     // res.setHeader(
     //   "Access-Control-Allow-Origin",
@@ -93,10 +98,15 @@ exports.getProductByBrand = catchAsync(
       Model = models[modelName];
     }
     const doc = await Model.find({ brand: brand });
-    if (!doc)
-      return next(
-        new AppError("No product found with the brand", 404)
-      );
+    if (!doc) {
+      // return next(
+      //   new AppError("No product found with the brand", 404)
+      // );
+      res.status(404).json({
+        status: "data not found",
+        data: null,
+      });
+    }
     // res.setHeader(
     //   "Access-Control-Allow-Origin",
     //   "https://8709-118-161-208-173.ngrok-free.app"

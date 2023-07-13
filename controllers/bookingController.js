@@ -23,9 +23,13 @@ exports.getBooking = catchAsync(async (req, res, next) => {
       strictPopulate: false,
     });
   if (!doc) {
-    return next(
-      new AppError("No booking found with the id", 404)
-    );
+    // return next(
+    //   new AppError("No booking found with the id", 404)
+    // );
+    return res.status(404).json({
+      status: "no booking found with the id",
+      data: null,
+    });
   }
   res.status(200).json({
     status: "success",
@@ -68,8 +72,13 @@ exports.getAllBookings = catchAsync(
     const doc = await Booking.find(filter).sort({
       createAt: -1,
     });
-    if (!doc)
-      return next(new AppError("No booking found", 404));
+    if (!doc) {
+      // return next(new AppError("No booking found", 404));
+      return res.status(404).json({
+        status: "booking not found",
+        data: null,
+      });
+    }
     res.status(200).json({
       status: "success",
       results: doc.length,
@@ -91,9 +100,13 @@ exports.updateBooking = catchAsync(
       }
     );
     if (!doc) {
-      return next(
-        new AppError("No booking found with the id", 404)
-      );
+      // return next(
+      //   new AppError("No booking found with the id", 404)
+      // );
+      return res.status(404).json({
+        status: "booking not found",
+        data: null,
+      });
     }
     res.status(200).json({
       status: "success",
@@ -112,6 +125,12 @@ exports.deleteBooking = catchAsync(
         canceled: true,
       }
     );
+    if (!doc) {
+      return res.status(404).json({
+        status: "booking not found",
+        data: null,
+      });
+    }
     res.status(204).json({
       status: "success",
       data: null,
