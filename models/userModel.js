@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
     },
     identification: {
       type: String,
-      required: [true, "A user must have a ID"],
+      // required: [true, "A user must have a ID"],
       unique: true,
       validate: {
         validator: function (value) {
