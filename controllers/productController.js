@@ -60,7 +60,8 @@ exports.getProductByType = catchAsync(
     const doc = await Model.find();
     if (!doc) {
       return res.status(404).json({
-        status: "data not found",
+        status: "error",
+        message: "data not found",
         data: null,
       });
       // return next(
@@ -103,7 +104,8 @@ exports.getProductByBrand = catchAsync(
       //   new AppError("No product found with the brand", 404)
       // );
       res.status(404).json({
-        status: "data not found",
+        status: "error",
+        message: "data not found",
         data: null,
       });
     }

@@ -27,7 +27,8 @@ exports.getBooking = catchAsync(async (req, res, next) => {
     //   new AppError("No booking found with the id", 404)
     // );
     return res.status(404).json({
-      status: "no booking found with the id",
+      status: "error",
+      message: "no booking found with the id",
       data: null,
     });
   }
@@ -75,7 +76,8 @@ exports.getAllBookings = catchAsync(
     if (!doc) {
       // return next(new AppError("No booking found", 404));
       return res.status(404).json({
-        status: "booking not found",
+        status: "error",
+        message: "booking not found",
         data: null,
       });
     }
@@ -104,7 +106,8 @@ exports.updateBooking = catchAsync(
       //   new AppError("No booking found with the id", 404)
       // );
       return res.status(404).json({
-        status: "booking not found",
+        status: "error",
+        message: "booking not found",
         data: null,
       });
     }
@@ -127,7 +130,8 @@ exports.deleteBooking = catchAsync(
     );
     if (!doc) {
       return res.status(404).json({
-        status: "booking not found",
+        status: "error",
+        message: "booking not found",
         data: null,
       });
     }

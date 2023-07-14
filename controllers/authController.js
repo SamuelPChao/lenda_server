@@ -7,7 +7,6 @@ const User = require("../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 
-
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -33,11 +32,11 @@ const createSendToken = (user, statusCode, req, res) => {
   // if (process.env.NODE_ENV === "production")
   //   cookieOptions.secure = true;
 
-  res.set("Authorization",token)
+  res.set("Authorization", token);
   res.cookie("jwt", token, cookieOptions);
 
   user.password = undefined;
-  
+
   res.status(statusCode).json({
     status: "Success",
     token,
@@ -59,12 +58,10 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { identification, password } = req.body;
   if (!identification || !password) {
-    return next(
-      new AppError(
-        "Please provide valid phone number and password",
-        400
-      )
-    );
+    return res.status(400).json({
+      status: "error",
+      message: "please provide valid identification",
+    });
   }
 
   const user = await User.findOne({
@@ -74,9 +71,10 @@ exports.login = catchAsync(async (req, res, next) => {
     !user ||
     !(await user.correctPassword(password, user.password))
   ) {
-    return next(
-      new AppError("Invalid phone or password", 401)
-    );
+    return res.status(401).json({
+      status: "error",
+      message: "invalid password",
+    });
   }
 
   createSendToken(user, 200, req, res);
@@ -85,7 +83,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res) => {
   const cookieOptions = {
     expires: new Date(Date.now() + 10 * 1000),
-    secure:true,
+    secure: true,
     httpOnly: true,
   };
   req.user = undefined;
@@ -98,69 +96,70 @@ exports.logout = (req, res) => {
   });
 };
 
-
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  try {
-    // if (req.cookies.jwt) {
-    //   console.log(req.cookies.jwt,'cookie')
-    //   const decoded = await promisify(verify)(
-    //     req.cookies.jwt,
-    //     process.env.JWT_SECRET
-    //   );
+  // try {
+  // if (req.cookies.jwt) {
+  //   console.log(req.cookies.jwt,'cookie')
+  //   const decoded = await promisify(verify)(
+  //     req.cookies.jwt,
+  //     process.env.JWT_SECRET
+  //   );
 
-    //   const currentUser = await User.findById(decoded.id);
-    //   if (!currentUser) {
-    //     res.status(401).json({
-    //       status: "Not authorized",
-    //       data: {},
-    //     });
-    //   }
+  //   const currentUser = await User.findById(decoded.id);
+  //   if (!currentUser) {
+  //     res.status(401).json({
+  //       status: "Not authorized",
+  //       data: {},
+  //     });
+  //   }
 
-    //   if (currentUser.changePasswordAfter(decoded.iat)) {
-    //     res.status(401).json({
-    //       status: "Password changed",
-    //       data: {},
-    //     });
-    //   }
+  //   if (currentUser.changePasswordAfter(decoded.iat)) {
+  //     res.status(401).json({
+  //       status: "Password changed",
+  //       data: {},
+  //     });
+  //   }
 
-    //   res.locals.user = currentUser;
-    //   res.status(200).json({
-    //     status: "success",
-    //     data: {
-    //       user: currentUser,
-    //     },
-    //   });
-    // }
-    if (req.headers.authorization) {
-      const decoded = await promisify(verify)(
-        req.headers.authorization,
-        process.env.JWT_SECRET
-      );
-      const currentUser = await User.findById(decoded.id);
-      if (!currentUser) {
-        res.status(401).json({
-          status: "Not authorized",
-          data: {},
-        });
-      }
-      if (currentUser.changePasswordAfter(decoded.iat)) {
-        res.status(401).json({
-          status: "Password Changed",
-          data: {},
-        });
-      }
-      res.locals.user = currentUser;
-      res.status(200).json({
-        status: "success",
-        data: {
-          user: currentUser,
-        },
+  //   res.locals.user = currentUser;
+  //   res.status(200).json({
+  //     status: "success",
+  //     data: {
+  //       user: currentUser,
+  //     },
+  //   });
+  // }
+  if (req.headers.authorization) {
+    const decoded = await promisify(verify)(
+      req.headers.authorization,
+      process.env.JWT_SECRET
+    );
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+      res.status(401).json({
+        status: "error",
+        message: "not authorized",
+        data: {},
       });
     }
-    next()
-  } catch (err) {
-    console.log(err);
+    if (currentUser.changePasswordAfter(decoded.iat)) {
+      res.status(401).json({
+        status: "error",
+        message: "password Changed",
+        data: {},
+      });
+    }
+    res.locals.user = currentUser;
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: currentUser,
+      },
+    });
   }
+  next();
+  // } catch (err) {
+  //   console.log(err);
+  // }
 });
 
 //user
@@ -211,10 +210,12 @@ exports.getUser = catchAsync(async (req, res, next) => {
     path: "bookings",
     select: "_id totalPrice checked paid canceled",
   });
-  if (!doc)
-    return next(
-      new AppError("No User found with the id", 404)
-    );
+  if (!doc) {
+    return res.status(404).json({
+      status: "error",
+      message: "no user found with the id",
+    });
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -228,10 +229,12 @@ exports.getUserById = catchAsync(async (req, res, next) => {
     path: "bookings",
     select: "_id totalPrice checked paid canceled",
   });
-  if (!doc)
-    return next(
-      new AppError("No user found with the id", 404)
-    );
+  if (!doc) {
+    return res.status(404).json({
+      status: "error",
+      message: "no user found with the id",
+    });
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -242,7 +245,12 @@ exports.getUserById = catchAsync(async (req, res, next) => {
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const doc = await User.find();
-  if (!doc) return next(new AppError("No user found", 404));
+  if (!doc) {
+    return res.status(404).json({
+      status: "error",
+      message: "no user found",
+    });
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -260,12 +268,12 @@ const filterObj = (obj, ...allowedFields) => {
 exports.updateMe = catchAsync(async (req, res, next) => {
   // console.log(req.file);
   // console.log(req.body);
-  if (req.body.password || req.body.passwordConfirm)
-    return next(
-      new AppError("Cannot Update Password Here"),
-      400
-    );
-
+  if (req.body.password || req.body.passwordConfirm) {
+    return res.status(400).json({
+      status: "error",
+      message: "Cannot Update Password Here",
+    });
+  }
   const filterBody = filterObj(
     req.body,
     "email",
@@ -314,12 +322,11 @@ exports.updatePassword = catchAsync(
         user.password
       ))
     ) {
-      return next(
-        new AppError("Current Password Is Wrong", 401)
-      );
+      return res.status(401).json({
+        status: "error",
+        message: "current password is wrong",
+      });
     }
-
-    const { password, passwordConfirm } = req.body;
     user.password = password;
     user.passwordConfirm = passwordConfirm;
     await user.save();
@@ -328,33 +335,33 @@ exports.updatePassword = catchAsync(
   }
 );
 
-exports.forgotPassword = catchAsync(
-  async (req, res, next) => {
-    const user = await User.findOne({
-      email: req.body.email,
-    });
-    if (!user)
-      return next(
-        new AppError("No user found with the email", 404)
-      );
+// exports.forgotPassword = catchAsync(
+//   async (req, res, next) => {
+//     const user = await User.findOne({
+//       email: req.body.email,
+//     });
+//     if (!user)
+//       return next(
+//         new AppError("No user found with the email", 404)
+//       );
 
-    const resetToken = user.createPasswordResetToken();
-    await user.save({ validateBeforeSave: false });
+//     const resetToken = user.createPasswordResetToken();
+//     await user.save({ validateBeforeSave: false });
 
-    try {
-    } catch (err) {
-      user.passwordResetToken = undefined;
-      user.passwordResetExpires = undefined;
-      await user.save({ validateBeforeSave: false });
+//     try {
+//     } catch (err) {
+//       user.passwordResetToken = undefined;
+//       user.passwordResetExpires = undefined;
+//       await user.save({ validateBeforeSave: false });
 
-      res.status(200).json({
-        status: "success",
-        message: "Token sent to email",
-      });
+//       res.status(200).json({
+//         status: "success",
+//         message: "Token sent to email",
+//       });
 
-      return next(
-        new AppError("Error occurs when sending email", 500)
-      );
-    }
-  }
-);
+//       return next(
+//         new AppError("Error occurs when sending email", 500)
+//       );
+//     }
+//   }
+// );

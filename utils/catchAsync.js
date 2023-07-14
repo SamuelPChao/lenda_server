@@ -11,16 +11,17 @@ module.exports = (fn) => {
           errors,
         });
       }
+
       if (
         err.name === "MongoServerError" ||
         err.code === 11000
       ) {
-        const fieldName = Object.keys(err.keyPattern)[0];
+        const fieldName = Object.keys(err.keyPattern);
         const fieldValue = err.keyValue[fieldName];
-
+        const msg = err.errmsg;
         return res.status(409).json({
           status: "error",
-          message: "Duplicate key error",
+          message: "duplicate key error",
           field: fieldName,
           value: fieldValue,
         });

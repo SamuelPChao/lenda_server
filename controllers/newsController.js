@@ -9,7 +9,7 @@ exports.getAllNews = catchAsync(async (req, res, next) => {
     );
   if (!doc)
     res.status(404).json({
-      status: "sucess",
+      status: "error",
       message: "No news found",
     });
   res.status(200).json({
@@ -25,7 +25,7 @@ exports.getNewsById = catchAsync(async (req, res, next) => {
   const doc = await News.findById(req.params.id);
   if (!doc)
     res.status(404).json({
-      status: "sucess",
+      status: "error",
       message: "No news found with the id",
     });
   res.status(200).json({
